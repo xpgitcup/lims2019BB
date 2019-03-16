@@ -28,12 +28,12 @@ $(function () {
         onLoadSuccess: function () {
             var cnodeid = readCookie("currentNode" + title, 0);
             console.info("上一次：" + cnodeid);
-            treeViewUl.tree("collapseAll");
+            operation4ThingTypeUL.tree("collapseAll");
             if (cnodeid != 0) {
                 console.info("扩展到：" + cnodeid);
                 var cnode = $("#" + cnodeid);
-                treeViewUl.tree("expandTo", cnode);
-                treeViewUl.tree("select", cnode);
+                operation4ThingTypeUL.tree("expandTo", cnode);
+                operation4ThingTypeUL.tree("select", cnode);
             }
         }
     })
@@ -57,5 +57,8 @@ function changeUpNode(node) {
 
 function createItem(id) {
     console.info("创建计划...");
-    ajaxRun("operation4Plan/create?thingOrTypeId=" + id + "view=create", 0, "operation4PlanDiv");
+    ajaxRun("operation4Plan/create?thingOrTypeId=" + id +
+        "&view=createTypePlan&isTypePlan=true&nextAction=index&nextController=operation4Plan",
+        0, "operation4PlanDiv");
+    //ajaxRun("operation4Plan/create?thingOrTypeId=" + id, 0, "operation4PlanDiv");
 }

@@ -7,6 +7,8 @@ import static org.springframework.http.HttpStatus.*
 class PlanController {
 
     PlanService planService
+    def thingTypeService
+    def thingService
     def commonQueryService
     def commonService
 
@@ -48,9 +50,27 @@ class PlanController {
     }
 
     def create() {
+
+        println("${params}")
+
         def view = "create"
         if (params.view) {
             view = params.view
+        }
+
+        if (params.thingOrTypeId) {
+            def aname
+            if (params.isTypePlan) {
+                def thingType = thingTypeService.get(params.thingOrTypeId)
+                if (thingType) {
+                    params.thingOrTypeName = thingType.name
+                }
+            } else {
+                def thing = thingService.get(params.thingOrTypeId)
+                if (thing) {
+                    params.thingOrTypeName = thing.name
+                }
+            }
         }
 
         def plan = new Plan(params)
