@@ -22,7 +22,7 @@
         </g:else>
     </g:else>
 <!-- end 实现可定制的布局 -->
-    <!--这个地方设置成固定的-->
+<!--这个地方设置成固定的-->
     <g:set var="entityName" value="通用计划"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${entityName}维护</title>
@@ -38,7 +38,7 @@
         <li>当前：${planTitle}.${planJsRoutine}</li>
         <li id="currentTitle"></li>
         <li><a id="createItem"></a></li>
-        <li><a id="editItem"></a></li>
+        <!--li><a id="editItem"></a></li-->
     </ul>
 </div>
 
@@ -48,15 +48,18 @@
 
 <div class="container-fluid">
     <!--左面显示类型-->
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="easyui-panel">
             <ul id="operation4ThingTypeUL" class="easyui-tree"></ul>
         </div>
     </div>
     <!--右边显示计划-->
-    <div class="col-md-6">
-    <div id="operation4PlanDiv" class="easyui-panel"></div>
-    <div id="pagination4PlanDiv" class="easyui-pagination"></div>
+    <div class="col-md-8">
+        <div id="operation4PlanDiv" class="easyui-panel"></div>
+
+        <div id="pagination4PlanDiv" class="easyui-pagination"></div>
+
+        <div id="operation4PlanItemDiv" class="easyui-panel"></div>
     </div>
 </div>
 

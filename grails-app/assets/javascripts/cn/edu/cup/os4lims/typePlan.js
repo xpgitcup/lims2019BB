@@ -8,6 +8,7 @@ var operation4ThingTypeUL;
 var jsTitle = "通用计划";
 var title4Plan = [jsTitle]
 var isTreeView4Plan = [false]
+var pagination4PlanDiv;
 //var treeData4PlanTitle = ["operation4PlanTitle/getTreeViewData"]
 
 
@@ -37,7 +38,42 @@ $(function () {
             }
         }
     })
+
+    /*
+    * 右边的
+    * */
+
+    var total = countPlan();
+    var title = jsTitle;
+    var localPageSize = 10;
+
+    pagination4PlanDiv = $("#pagination4PlanDiv");
+    pagination4PlanDiv.pagination({
+        pageSize: localPageSize,
+        total: total,
+        pageList: [1, 3, 5, 10, 20, 30],
+        showPageList: true,
+        //pageNumber: currentPage,
+        //displayMsg: paginationMessage,
+        onSelectPage: function (pageNumber, localPageSize) {
+            //console.info("setupPaginationParams4TabPage: " + title)
+            $.cookie("currentPage" + title, pageNumber);     //记录当前页面
+            loadPlan();
+        }
+    })
+
 });
+
+function loadPlan() {
+    var node = readCookie("currentNode", 0);
+    ajaxRun("operation4Plan/list?key=" + jsTitle + "&thingOrTypeId=" + node, 0, "operation4PlanDiv");
+}
+
+function countPlan() {
+    var node = readCookie("currentNode", 0);
+    var count = ajaxCalculate("operation4Plan/count?key=" + jsTitle + "&thingOrTypeId=" + node);
+    return count;
+}
 
 /*
 * 节点被选择。。。
@@ -52,7 +88,24 @@ function changeUpNode(node) {
     //$("#deleteItem").attr('href', 'javascript: deleteItem(' + node.attributes[0] + ')');
     //$("#deleteItem").html("删除" + node.attributes[0] + '节点');
     $("#currentTitle").html(node.text);
-    ajaxRun("operation4Plan/list?key=" + jsTitle + "&thingOrTypeId=" + node.attributes[0], 0, "operation4PlanDiv");
+    $.cookie("currentNode", node.attributes[0]);
+    loadPlan();
+}
+
+function deleteItem(id) {
+    ajaxExecuteWithMethod("operation4Plan/delete?id=" + id, 'DELETE');
+    location.reload();
+}
+
+function editItem(id) {
+    console.info("编辑计划...");
+    ajaxRun("operation4Plan/edit?thingOrTypeId=" + id +
+        "&view=editTypePlan&isTypePlan=true",
+        0, "operation4PlanDiv");
+}
+
+function showItem(id) {
+    ajaxRun("operation4Plan/show?view=showTypePlan", id, "operation4PlanDiv");
 }
 
 function createItem(id) {
@@ -60,10 +113,11 @@ function createItem(id) {
     ajaxRun("operation4Plan/create?thingOrTypeId=" + id +
         "&view=createTypePlan&isTypePlan=true",
         0, "operation4PlanDiv");
-    /*
+}
+
+function createPlanItem(id) {
+    console.info("创建计划...");
     ajaxRun("operation4Plan/create?thingOrTypeId=" + id +
-        "&view=createTypePlan&isTypePlan=true&nextAction=index&nextController=operation4Plan",
+        "&view=createTypePlan&isTypePlan=true",
         0, "operation4PlanDiv");
-        */
-    //ajaxRun("operation4Plan/create?thingOrTypeId=" + id, 0, "operation4PlanDiv");
 }
