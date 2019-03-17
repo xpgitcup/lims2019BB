@@ -156,7 +156,7 @@
     "menuItems": [
       {
         "menuContext": "通用计划维护",
-        "menuAction": "operation4Plan/index?title=通用计划&jsRoutine=typePlan",
+        "menuAction": "operation4Plan/index",
         "menuDescription": "与系统中的用户对话",
         "upMenuItem": "教师服务",
         "menuOrder": 0

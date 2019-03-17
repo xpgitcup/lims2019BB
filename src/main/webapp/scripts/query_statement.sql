@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 16/03/2019 21:23:05
+ Date: 17/03/2019 19:29:13
 */
 
 SET NAMES utf8mb4;
@@ -83,6 +83,6 @@ INSERT INTO `query_statement` VALUES (206, 0, NULL, NULL, b'0', b'0', 'list.oper
 INSERT INTO `query_statement` VALUES (208, 0, NULL, NULL, b'0', b'0', 'list.operation4Team.currentTeam.队员列表', NULL);
 INSERT INTO `query_statement` VALUES (210, 0, 'keyString', 'select count(*) from QueryStatement queryStatement where queryStatement.keyString like :keyString', b'0', b'1', 'count.operation4QueryStatement.查询配置.keyString', NULL);
 INSERT INTO `query_statement` VALUES (211, 0, 'keyString', 'from QueryStatement queryStatement where queryStatement.keyString like :keyString', b'0', b'1', 'list.operation4QueryStatement.查询配置.keyString', 'listQueryStatement');
-INSERT INTO `query_statement` VALUES (216, 4, 'thingOrTypeId', 'from Plan plan  where plan.thingOrTypeId=cast(:thingOrTypeId as integer)', b'0', b'1', 'list.operation4Plan.通用计划.thingOrTypeId', 'listPlan');
+INSERT INTO `query_statement` VALUES (216, 5, 'thingOrTypeId', 'from Plan plan  where plan.thingOrTypeId=cast(:thingOrTypeId as integer) order by planVersion desc', b'0', b'1', 'list.operation4Plan.通用计划.thingOrTypeId', 'listPlan');
 
 SET FOREIGN_KEY_CHECKS = 1;

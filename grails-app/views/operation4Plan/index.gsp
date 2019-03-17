@@ -22,10 +22,11 @@
         </g:else>
     </g:else>
 <!-- end 实现可定制的布局 -->
-    <g:set var="entityName" value="${planTitle}"/>
+    <!--这个地方设置成固定的-->
+    <g:set var="entityName" value="通用计划"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${entityName}维护</title>
-    <asset:javascript src="cn/edu/cup/os4lims/${planJsRoutine}.js"/>
+    <asset:javascript src="cn/edu/cup/os4lims/typePlan.js"/>
 </head>
 
 <body>
@@ -54,8 +55,8 @@
     </div>
     <!--右边显示计划-->
     <div class="col-md-6">
-        <div id="operation4PlanDiv" class="easyui-panel">
-        </div>
+    <div id="operation4PlanDiv" class="easyui-panel"></div>
+    <div id="pagination4PlanDiv" class="easyui-pagination"></div>
     </div>
 </div>
 
