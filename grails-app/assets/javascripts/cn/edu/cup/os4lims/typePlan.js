@@ -58,7 +58,12 @@ function changeUpNode(node) {
 function createItem(id) {
     console.info("创建计划...");
     ajaxRun("operation4Plan/create?thingOrTypeId=" + id +
+        "&view=createTypePlan&isTypePlan=true",
+        0, "operation4PlanDiv");
+    /*
+    ajaxRun("operation4Plan/create?thingOrTypeId=" + id +
         "&view=createTypePlan&isTypePlan=true&nextAction=index&nextController=operation4Plan",
         0, "operation4PlanDiv");
+        */
     //ajaxRun("operation4Plan/create?thingOrTypeId=" + id, 0, "operation4PlanDiv");
 }

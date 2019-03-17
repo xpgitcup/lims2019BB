@@ -42,6 +42,7 @@
                     <f:all bean="plan"/>
                     <g:hiddenField name="nextController" value="${params.nextController}"/>
                     <g:hiddenField name="nextAction" value="${params.nextAction}"/>
+                    <g:hiddenField name="url" value="index?title=通用计划&jsRoutine=typePlan"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

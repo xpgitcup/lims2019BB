@@ -74,7 +74,7 @@ class ${className}Controller {
             action = params.nextAction
         }
 
-        def controller = ""
+        def controller = params.controller
         if (params.nextController) {
             controller = params.nextController
         }
@@ -86,9 +86,8 @@ class ${className}Controller {
             flash.message = ${propertyName}.errors
         }
 
-        if (controller == "")
-        {
-            redirect(action: action)
+        if (params.url) {
+            redirect(params.url)
         } else {
             redirect(controller: controller, action: action)
         }

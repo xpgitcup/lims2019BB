@@ -6,6 +6,7 @@ class Plan {
     String thingOrTypeName      //thing ID 以及名称
     Date updateDate
     Boolean isTypePlan = true   // 针对类型的计划
+    Integer planVersion = 0
 
     static hasMany = [planItems: PlanItem]
 
@@ -19,4 +20,5 @@ class Plan {
     String toString() {
         return "${thingOrTypeName}.计划"
     }
+
 }
