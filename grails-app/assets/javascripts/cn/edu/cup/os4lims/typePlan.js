@@ -66,12 +66,12 @@ $(function () {
 
 function loadPlan() {
     var node = readCookie("currentNode", 0);
-    ajaxRun("operation4Plan/list?key=" + jsTitle + "&thingOrTypeId=" + node, 0, "operation4PlanDiv");
+    ajaxRun("operation4Plan/list?key=" + jsTitle + "&keyString=" + node + "&thingTypeId=" + node, 0, "operation4PlanDiv");
 }
 
 function countPlan() {
     var node = readCookie("currentNode", 0);
-    var count = ajaxCalculate("operation4Plan/count?key=" + jsTitle + "&thingOrTypeId=" + node);
+    var count = ajaxCalculate("operation4Plan/count?key=" + jsTitle + "&keyString=" + node + "&thingTypeId=" + node);
     return count;
 }
 
@@ -80,15 +80,13 @@ function countPlan() {
 * */
 function changeUpNode(node) {
     console.info("修改根节点的id...")
+    $.cookie("currentNode", node.attributes[0]);
+    var total = countPlan();
     $("#createItem").attr('href', 'javascript: createItem(' + node.attributes[0] + ')');
     $("#createItem").html("创建" + node.attributes[0] + '的计划');
     $("#editItem").attr('href', 'javascript: editItem(' + node.attributes[0] + ')');
     $("#editItem").html("编辑" + node.attributes[0] + '计划');
-    //  $("#deleteItem").attr('href', 'operation4ThingType/delete?id=' + node.attributes[0]);   // 不能POST
-    //$("#deleteItem").attr('href', 'javascript: deleteItem(' + node.attributes[0] + ')');
-    //$("#deleteItem").html("删除" + node.attributes[0] + '节点');
     $("#currentTitle").html(node.text);
-    $.cookie("currentNode", node.attributes[0]);
     loadPlan();
 }
 
@@ -99,8 +97,8 @@ function deleteItem(id) {
 
 function editItem(id) {
     console.info("编辑计划...");
-    ajaxRun("operation4Plan/edit?thingOrTypeId=" + id +
-        "&view=editTypePlan&isTypePlan=true",
+    ajaxRun("operation4Plan/edit?thingTypeId=" + id +
+        "&view=editTypePlan",
         0, "operation4PlanDiv");
 }
 
@@ -110,14 +108,13 @@ function showItem(id) {
 
 function createItem(id) {
     console.info("创建计划...");
-    ajaxRun("operation4Plan/create?thingOrTypeId=" + id +
-        "&view=createTypePlan&isTypePlan=true",
+    ajaxRun("operation4Plan/create?thingTypeId=" + id +
+        "&view=createTypePlan",
         0, "operation4PlanDiv");
 }
 
 function createPlanItem(id) {
     console.info("创建计划...");
-    ajaxRun("operation4Plan/create?thingOrTypeId=" + id +
-        "&view=createTypePlan&isTypePlan=true",
+    ajaxRun("operation4Plan/create?thingTypeId=" + id + "&view=createTypePlan",
         0, "operation4PlanDiv");
 }

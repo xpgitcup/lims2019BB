@@ -15,7 +15,7 @@ class CommonQueryService {
     def listFunction(params) {
         def result = [:]
         def keyString = generateKeyString(params)
-        println("${keyString}")
+        println("listFunction: ${keyString} ${params}")
         def objectList
         result.view = "default"
         def pl = []
