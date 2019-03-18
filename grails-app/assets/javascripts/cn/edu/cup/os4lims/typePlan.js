@@ -10,6 +10,7 @@ var title4Plan = [jsTitle]
 var isTreeView4Plan = [false]
 var pagination4PlanDiv;
 //var treeData4PlanTitle = ["operation4PlanTitle/getTreeViewData"]
+var pageSize4Plan = 10;
 
 
 $(function () {
@@ -45,7 +46,7 @@ $(function () {
 
     var total = countPlan();
     var title = jsTitle;
-    var localPageSize = 10;
+    var localPageSize = pageSize4Plan;
 
     pagination4PlanDiv = $("#pagination4PlanDiv");
     pagination4PlanDiv.pagination({
@@ -57,21 +58,26 @@ $(function () {
         //displayMsg: paginationMessage,
         onSelectPage: function (pageNumber, localPageSize) {
             //console.info("setupPaginationParams4TabPage: " + title)
+            console.info("分页设置：" + localPageSize);
             $.cookie("currentPage" + title, pageNumber);     //记录当前页面
-            loadPlan();
+            loadPlan(pageNumber, pageSize);
         }
     })
 
 });
 
-function loadPlan() {
+function loadPlan(page, pageSize) {
     var node = readCookie("currentNode", 0);
-    ajaxRun("operation4Plan/list?key=" + jsTitle + "&keyString=" + node + "&thingTypeId=" + node, 0, "operation4PlanDiv");
+    //ajaxRun("operation4Plan/list?key=" + jsTitle + "&keyString=" + node + "&thingTypeId=" + node, 0, "operation4PlanDiv");
+    console.info("每页大小：" + pageSize);
+    var params = getParams(page, pageSize);    //getParams必须是放在最最前面！！
+    ajaxRun("operation4Plan/list" + params + "&key=" + jsTitle + "&thingTypeId=" + node, 0, "operation4PlanDiv");
 }
 
 function countPlan() {
     var node = readCookie("currentNode", 0);
-    var count = ajaxCalculate("operation4Plan/count?key=" + jsTitle + "&keyString=" + node + "&thingTypeId=" + node);
+    //var count = ajaxCalculate("operation4Plan/count?key=" + jsTitle + "&keyString=" + node + "&thingTypeId=" + node);
+    var count = ajaxCalculate("operation4Plan/count?key=" + jsTitle + "&thingTypeId=" + node);
     return count;
 }
 
@@ -82,12 +88,12 @@ function changeUpNode(node) {
     console.info("修改根节点的id...")
     $.cookie("currentNode", node.attributes[0]);
     var total = countPlan();
-    $("#createItem").attr('href', 'javascript: createItem(' + node.attributes[0] + ')');
-    $("#createItem").html("创建" + node.attributes[0] + '的计划');
+    $("#createItem").attr('href', 'javascript: createItemAuto(' + node.attributes[0] + ')');
+    $("#createItem").html("自动创建" + node.attributes[0] + '的计划');
     $("#editItem").attr('href', 'javascript: editItem(' + node.attributes[0] + ')');
     $("#editItem").html("编辑" + node.attributes[0] + '计划');
     $("#currentTitle").html(node.text);
-    loadPlan();
+    loadPlan(1, pageSize4Plan);
 }
 
 function deleteItem(id) {
@@ -104,6 +110,12 @@ function editItem(id) {
 
 function showItem(id) {
     ajaxRun("operation4Plan/show?view=showTypePlan", id, "operation4PlanDiv");
+}
+
+function createItemAuto(id) {
+    console.info("创建计划...");
+    ajaxExecute("operation4Plan/createAuto?thingTypeId=" + id);
+    location.reload();
 }
 
 function createItem(id) {

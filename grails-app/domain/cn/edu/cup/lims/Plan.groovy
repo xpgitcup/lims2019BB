@@ -3,9 +3,8 @@ package cn.edu.cup.lims
 class Plan {
 
     Integer thingTypeId       //id
-    String thingTypeIdList
     String thingTypeName      //thing ID 以及名称
-    Date updateDate
+    Date updateDate = new Date()
     Integer planVersion = 0
 
     static hasMany = [planItems: PlanItem]
@@ -13,8 +12,8 @@ class Plan {
     static constraints = {
         thingTypeId()
         thingTypeName()
-        thingTypeIdList()
         updateDate()
+        planVersion()
     }
 
     String toString() {

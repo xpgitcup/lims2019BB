@@ -6,7 +6,29 @@ import cn.edu.cup.lims.PlanController
 class Operation4PlanController extends PlanController {
 
     def thingTypeService
-    def thingService
+
+    def createAuto() {
+        def thingType = thingTypeService.get(params.thingTypeId)
+        if (thingType) {
+            createPlan(thingType)
+            thingType.subTypes.each { e ->
+                createPlan(e)
+            }
+        }
+        redirect(action: "index")
+    }
+
+    private void createPlan(thingType) {
+        if (Plan.countByThingTypeId(thingType.id)<1) {
+            def newPlan = new Plan(
+                    thingTypeId: thingType.id,
+                    thingTypeName: thingType.name,
+                    updateDate: new Date(),
+                    planVersion: getNewPlanVersion()
+            )
+            planService.save(newPlan)
+        }
+    }
 
     def create() {
 
@@ -30,15 +52,7 @@ class Operation4PlanController extends PlanController {
                 params.thingTypeIdList = liststr
             }
             //计算planVersion
-            def q = Plan.executeQuery("select max(plan.planVersion) from Plan plan where (plan.thingTypeName=${params.thingTypeName})")
-            println("控制器内统计: ${q}")
-            def maxV = q[0]
-            def pv = 0
-            if (maxV) {
-                pv = maxV + 1
-            } else {
-                pv = 1
-            }
+            int pv = getNewPlanVersion()
             params.planVersion = pv
         }
 
@@ -49,6 +63,19 @@ class Operation4PlanController extends PlanController {
         } else {
             respond plan
         }
+    }
+
+    private int getNewPlanVersion() {
+        def q = Plan.executeQuery("select max(plan.planVersion) from Plan plan where (plan.thingTypeName=${params.thingTypeName})")
+        println("控制器内统计: ${q}")
+        def maxV = q[0]
+        def pv = 0
+        if (maxV) {
+            pv = maxV + 1
+        } else {
+            pv = 1
+        }
+        pv
     }
 
     def index() {
