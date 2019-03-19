@@ -3,11 +3,26 @@ package cn.edu.cup.os4lims
 import cn.edu.cup.lims.Person
 import cn.edu.cup.lims.PersonTitle
 import cn.edu.cup.lims.Progress
+import cn.edu.cup.lims.ProjectPlan
 import cn.edu.cup.lims.ProjectPlanController
 import cn.edu.cup.lims.Team
 import cn.edu.cup.lims.ThingTypeCircle
 
 class Operation4ProjectPlanController extends ProjectPlanController {
+
+    def teamService
+
+    def createProjectPlan(Team team) {
+        def projectPlan = new ProjectPlan(
+                teamId: team.id,
+                te
+        )
+    }
+
+    def getTreeViewData() {
+        def team = teamService.get(params.currentTeam)
+        createProjectPlan(team)
+    }
 
     protected void prepareParams() {
         def myself = Person.get(session.realId)

@@ -56,6 +56,28 @@ function shiftDisplay(currentTeam, currentPage) {
         teamListDiv.style.display = "none";
         projectPlanDiv.style.display = "block";
 
+        var title = jsTitle4ProjectPlan;
+        operation4ProjectPlanUL = $("#operation4ProjectPlanUL");
+        operation4ProjectPlanUL.tree({
+            url: "operation4ProjectPlan/getTreeViewData?currentTeam=" + currentTeam,
+            onSelect: function (node) {
+                console.info("树形结构节点选择：" + node.target.id);
+                $.cookie("currentNode" + title, node.target.id);
+                changeUpNode(node);
+            },
+            onLoadSuccess: function () {
+                var cnodeid = readCookie("currentNode" + title, 0);
+                console.info("上一次：" + cnodeid);
+                operation4ProjectPlanUL.tree("collapseAll");
+                if (cnodeid != 0) {
+                    console.info("扩展到：" + cnodeid);
+                    var cnode = $("#" + cnodeid);
+                    operation4ProjectPlanUL.tree("expandTo", cnode);
+                    operation4ProjectPlanUL.tree("select", cnode);
+                }
+            }
+        })
+
         var total = countProgress();
         var currentPageProgress = readCookie("currentPageProgress" + jsTitle4ProjectPlan, 1);
         loadProgress(currentPageProgress, pageSize4ProjectPlan);
