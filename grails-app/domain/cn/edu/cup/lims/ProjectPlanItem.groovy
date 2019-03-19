@@ -10,6 +10,8 @@ class ProjectPlanItem {
 
     static belongsTo = [projectPlan: ProjectPlan]
 
+    static hasMany = [subProjectPlanItems: ProjectPlanItem]
+
     static constraints = {
         upProjectItem(nullable: true)
         description()

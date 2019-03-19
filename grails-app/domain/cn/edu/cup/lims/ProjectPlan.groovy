@@ -2,19 +2,17 @@ package cn.edu.cup.lims
 
 class ProjectPlan {
 
-    Integer teamId
-    String projectName
+    Team team
     Date updateDate
 
     static hasMany = [projectPlaneItems: ProjectPlanItem]
 
     static constraints = {
-        teamId()
-        projectName()
+        team()
         updateDate()
     }
 
     String toString() {
-        return "${projectName}.计划"
+        return "${team}.计划"
     }
 }

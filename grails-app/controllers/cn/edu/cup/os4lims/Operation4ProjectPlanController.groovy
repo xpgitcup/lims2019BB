@@ -6,22 +6,43 @@ import cn.edu.cup.lims.Progress
 import cn.edu.cup.lims.ProjectPlan
 import cn.edu.cup.lims.ProjectPlanController
 import cn.edu.cup.lims.Team
+import cn.edu.cup.lims.ThingType
 import cn.edu.cup.lims.ThingTypeCircle
+import cn.edu.cup.system.JsFrame
+import grails.converters.JSON
 
 class Operation4ProjectPlanController extends ProjectPlanController {
 
     def teamService
+    def treeViewService
 
     def createProjectPlan(Team team) {
         def projectPlan = new ProjectPlan(
-                teamId: team.id,
-                te
+                team: team,
+                updateDate: new Date()
         )
+        projectPlanService.save(projectPlan);
+        return projectPlan
     }
 
     def getTreeViewData() {
         def team = teamService.get(params.currentTeam)
-        createProjectPlan(team)
+        def projectPlan
+        if (ProjectPlan.countByTeam(team) < 1) {
+            projectPlan = createProjectPlan(team)
+        } else {
+            projectPlan = ProjectPlan.findByTeam(team)
+        }
+        def data = projectPlan.projectPlaneItems
+        params.context = "description"
+        params.subItems = "subProjectPlanItems"
+        params.attributes = "id"    //
+        def result = treeViewService.generateNodesString(data, params, JsFrame.EasyUI)
+        if (request.xhr) {
+            render result as JSON
+        } else {
+            result
+        }
     }
 
     protected void prepareParams() {
