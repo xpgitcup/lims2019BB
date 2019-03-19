@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-19 11:01:48
+Date: 2019-03-19 18:47:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `query_statement` (
   `view_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `UK_iejb2adhrl11w1nanxv8r9hql` (`key_string`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of query_statement
@@ -82,3 +82,9 @@ INSERT INTO `query_statement` VALUES ('210', '0', 'keyString', 'select count(*) 
 INSERT INTO `query_statement` VALUES ('211', '0', 'keyString', 'from QueryStatement queryStatement where queryStatement.keyString like :keyString', '\0', '', 'list.operation4QueryStatement.查询配置.keyString', 'listQueryStatement');
 INSERT INTO `query_statement` VALUES ('216', '5', 'thingTypeId', 'from Plan plan  where plan.thingTypeId=cast(:thingTypeId as integer) order by planVersion desc', '\0', '', 'list.operation4Plan.通用计划.thingTypeId', 'listPlan');
 INSERT INTO `query_statement` VALUES ('217', '1', 'thingTypeId', 'select count(*) from Plan plan where plan.thingTypeId=cast(:thingTypeId as integer)', '\0', '', 'count.operation4Plan.通用计划.thingTypeId', null);
+INSERT INTO `query_statement` VALUES ('218', '1', 'thingTypeList', 'select count(*) from Team team where team.thing in :thingTypeList', '\0', '', 'count.operation4ProjectPlan.进度归档.myself', null);
+INSERT INTO `query_statement` VALUES ('219', '1', 'thingTypeList', 'from Team team where team.thing in :thingTypeList order by team.thing', '\0', '', 'list.operation4ProjectPlan.进度归档.myself', 'listTeam');
+INSERT INTO `query_statement` VALUES ('220', '1', 'thingTypeList', 'select count(*) from Team team where team.thing in :thingTypeList', '\0', '', 'count.operation4ProjectPlan.进度归档.thingTypeList', null);
+INSERT INTO `query_statement` VALUES ('221', '1', 'thingTypeList', 'from Team team where team.thing in :thingTypeList order by team.thing', '\0', '', 'list.operation4ProjectPlan.进度归档.thingTypeList', 'listTeam');
+INSERT INTO `query_statement` VALUES ('224', '2', 'currentTeam', 'from Progress progress where progress.team=:currentTeam order by progress.regDate desc', '\0', '', 'list.operation4ProjectPlan.currentTeam.进度列表', 'listProgress');
+INSERT INTO `query_statement` VALUES ('225', '0', null, null, '\0', '', 'count.operation4ProjectPlan.currentTeam.进度列表', null);

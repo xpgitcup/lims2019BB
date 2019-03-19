@@ -68,7 +68,7 @@ $(function () {
 
 function loadPlan(page, pageSize) {
     var node = readCookie("currentNode", 0);
-    //ajaxRun("operation4Plan/list?key=" + jsTitle + "&keyString=" + node + "&thingTypeId=" + node, 0, "operation4PlanDiv");
+    //ajaxRun("operation4Plan/list?key=" + jsTitle4ProjectPlan + "&keyString=" + node + "&thingTypeId=" + node, 0, "operation4PlanDiv");
     console.info("每页大小：" + pageSize);
     var params = getParams(page, pageSize);    //getParams必须是放在最最前面！！
     ajaxRun("operation4Plan/list" + params + "&key=" + jsTitle + "&thingTypeId=" + node, 0, "operation4PlanDiv");
@@ -76,7 +76,7 @@ function loadPlan(page, pageSize) {
 
 function countPlan() {
     var node = readCookie("currentNode", 0);
-    //var count = ajaxCalculate("operation4Plan/count?key=" + jsTitle + "&keyString=" + node + "&thingTypeId=" + node);
+    //var count = ajaxCalculate("operation4Plan/count?key=" + jsTitle4ProjectPlan + "&keyString=" + node + "&thingTypeId=" + node);
     var count = ajaxCalculate("operation4Plan/count?key=" + jsTitle + "&thingTypeId=" + node);
     return count;
 }

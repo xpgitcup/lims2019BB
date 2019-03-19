@@ -23,7 +23,7 @@
     </g:else>
 <!-- end 实现可定制的布局 -->
 <!--这个地方设置成固定的-->
-    <g:set var="entityName" value="个性计划"/>
+    <g:set var="entityName" value="进度归档"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${entityName}维护</title>
     <asset:javascript src="cn/edu/cup/os4lims/projectPlan.js"/>
@@ -32,13 +32,14 @@
 <body>
 
 <div class="nav">
-    <ul id="operation4ProjectPlanUl">
+    <ul>
         <li class="icon-help">&nbsp&nbsp&nbsp&nbsp：</li>
-        <li id="tipsOperation4Progress"></li>
-        <li>当前：${planTitle}.${planJsRoutine}</li>
-        <li id="currentTitle"></li>
-        <li><a id="createItem"></a></li>
-        <!--li><a id="editItem"></a></li-->
+        <li id="projectSelect">选择团队</li>
+        <li>==></li>
+        <li id="progressOperation">进度归档</li>
+        <li>
+            <a href="javascript: clearTeam()">重新选择</a>
+        </li>
     </ul>
 </div>
 
@@ -47,19 +48,26 @@
 </g:if>
 
 <div class="container-fluid">
-    <!--左面显示类型-->
-    <div class="col-md-4">
-        <div class="easyui-panel">
-            <ul id="operation4ThingTypeUL" class="easyui-tree"></ul>
-        </div>
+    <div id="teamListDiv">
+        <!--当前项目-->
+        <div id="operation4ProjectPlanTeamListDiv" class="easyui-panel"></div>
+        <div id="pagination4ProjectPlanTeamListDiv" class="easyui-pagination"></div>
     </div>
-    <!--右边显示计划-->
-    <div class="col-md-8">
-        <div id="operation4ProjectPlanDiv" class="easyui-panel"></div>
 
-        <div id="pagination4PlanDiv" class="easyui-pagination"></div>
+    <div id="projectPlanDiv">
+        <!--左面显示类型-->
+        <div class="col-md-4">
+            <div class="easyui-panel">
+                <!--这是进度计划的树形结构-->
+                <ul id="operation4ProjectPlanUL" class="easyui-tree"></ul>
+            </div>
+        </div>
+        <!--右边显示计划-->
+        <div class="col-md-8">
+            <div id="operation4ProjectPlanProgressListDiv" class="easyui-panel"></div>
 
-        <div id="operation4ProjectPlanItemDiv" class="easyui-panel"></div>
+            <div id="pagination4ProjectPlanProgressListDiv" class="easyui-pagination"></div>
+        </div>
     </div>
 </div>
 
