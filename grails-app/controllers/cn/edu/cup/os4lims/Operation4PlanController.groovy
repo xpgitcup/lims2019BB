@@ -2,6 +2,7 @@ package cn.edu.cup.os4lims
 
 import cn.edu.cup.lims.Plan
 import cn.edu.cup.lims.PlanController
+import cn.edu.cup.lims.ThingType
 
 class Operation4PlanController extends PlanController {
 
@@ -80,6 +81,9 @@ class Operation4PlanController extends PlanController {
 
     def index() {
         //println("${params}")
+        ThingType.list().each { e->
+            createPlan(e)
+        }
         return super.index()
     }
 }

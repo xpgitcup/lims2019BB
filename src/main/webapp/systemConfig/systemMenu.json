@@ -163,7 +163,7 @@
       },
       {
         "menuContext": "个性计划维护",
-        "menuAction": "operation4Plan/index?title=个性计划&jsRoutine=thingPlan",
+        "menuAction": "operation4ProjectPlan/index",
         "menuDescription": "上传每周工作汇报",
         "upMenuItem": "教师服务",
         "menuOrder": 0
