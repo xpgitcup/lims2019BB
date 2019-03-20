@@ -7,6 +7,8 @@ class PlanItem {
 
     static belongsTo = [plan: Plan]
 
+    static hasMany = [subPlanItems: PlanItem]
+
     static constraints = {
         upPlanItem(nullable: true)
         description()

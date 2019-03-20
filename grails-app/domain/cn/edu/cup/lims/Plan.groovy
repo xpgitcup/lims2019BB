@@ -2,22 +2,18 @@ package cn.edu.cup.lims
 
 class Plan {
 
-    Integer thingTypeId       //id
-    String thingTypeName      //thing ID 以及名称
+    ThingType thingType
     Date updateDate = new Date()
-    Integer planVersion = 0
 
     static hasMany = [planItems: PlanItem]
 
     static constraints = {
-        thingTypeId()
-        thingTypeName()
+        thingType()
         updateDate()
-        planVersion()
     }
 
     String toString() {
-        return "${thingTypeName}.计划"
+        return "${thingType}.计划"
     }
 
 }
