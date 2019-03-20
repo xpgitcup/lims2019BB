@@ -1,0 +1,196 @@
+[
+  {
+    "menuContext": "系统维护",
+    "menuAction": "#",
+    "menuDescription": "对系统的菜单结构进行用户友好的维护",
+    "roleAttribute": "系统维护",
+    "menuOrder": 0,
+    "menuItems": [
+      {
+        "menuContext": "属性维护",
+        "menuAction": "Operation4SystemAttribute/index",
+        "menuDescription": "对系统的用户属性进行用户友好的维护",
+        "upMenuItem": "系统维护",
+        "menuOrder": 0
+      },
+      {
+        "menuContext": "用户维护",
+        "menuAction": "Operation4SystemUser/index",
+        "menuDescription": "对系统的用户进行用户友好的维护",
+        "upMenuItem": "系统维护",
+        "menuOrder": 10
+      },
+      {
+        "menuContext": "菜单维护",
+        "menuAction": "Operation4SystemMenu/index",
+        "menuDescription": "对系统的菜单用户进行用户友好的维护",
+        "upMenuItem": "系统维护",
+        "menuOrder": 20
+      },
+      {
+        "menuContext": "日志维护",
+        "menuAction": "Operation4SystemLog/index",
+        "menuDescription": "对系统的日志进行用户友好的维护",
+        "upMenuItem": "系统维护",
+        "menuOrder": 30
+      },
+      {
+        "menuContext": "查询维护",
+        "menuAction": "operation4QueryStatement/index",
+        "menuDescription": "对系统底层的查询语句进行维护",
+        "upMenuItem": "系统维护",
+        "menuOrder": 40
+      }
+    ]
+  },
+  {
+    "menuContext": "基础维护",
+    "menuAction": "#",
+    "menuDescription": "维护基础数据",
+    "roleAttribute": "基础数据服务",
+    "menuOrder": 0,
+    "menuItems": [
+      {
+        "menuContext": "人员类型",
+        "menuAction": "Operation4PersonTitle/index",
+        "menuDescription": "维护人员的各种类型数据",
+        "upMenuItem": "基础维护",
+        "menuOrder": 0
+      },
+      {
+        "menuContext": "项目类型",
+        "menuAction": "Operation4ThingType/index",
+        "menuDescription": "维护各种项目的类型数据",
+        "upMenuItem": "基础维护",
+        "menuOrder": 2
+      },
+      {
+        "menuContext": "任务圈维护",
+        "menuAction": "Operation4ThingTypeCircle/index",
+        "menuDescription": "任务与人员类别之间建立联系",
+        "upMenuItem": "基础维护",
+        "menuOrder": 4
+      },
+      {
+        "menuContext": "人员数据",
+        "menuAction": "Operation4Person/index",
+        "menuDescription": "各种人员的基础数据",
+        "upMenuItem": "基础维护",
+        "menuOrder": 1
+      },
+      {
+        "menuContext": "项目数据",
+        "menuAction": "Operation4Thing/index",
+        "menuDescription": "各种项目的基础数据",
+        "upMenuItem": "基础维护",
+        "menuOrder": 3
+      }
+    ]
+  },
+  {
+    "menuContext": "公共服务",
+    "menuAction": "#",
+    "menuDescription": "对所有用户开放的功能",
+    "roleAttribute": "公共服务",
+    "menuOrder": 0,
+    "menuItems": [
+      {
+        "menuContext": "社区沟通",
+        "menuAction": "Operation4SystemChat/index",
+        "menuDescription": "与系统中的用户对话",
+        "upMenuItem": "公共服务",
+        "menuOrder": 0
+      },
+      {
+        "menuContext": "课题选择",
+        "menuAction": "operation4TeamManageA/index",
+        "menuDescription": "与系统中的用户对话",
+        "upMenuItem": "公共服务",
+        "menuOrder": 0
+      }
+    ]
+  },
+  {
+    "menuContext": "用户服务",
+    "menuAction": "#",
+    "menuDescription": "便于教师检查进度",
+    "roleAttribute": "系统维护",
+    "menuOrder": 0,
+    "menuItems": [
+      {
+        "menuContext": "团队管理",
+        "menuAction": "operation4Team/index",
+        "menuDescription": "新生加入到系统中，创建用户",
+        "upMenuItem": "用户服务",
+        "menuOrder": 0
+      },
+      {
+        "menuContext": "任务管理",
+        "menuAction": "operation4Progress/index",
+        "menuDescription": "新生加入到系统中，创建用户",
+        "upMenuItem": "用户服务",
+        "menuOrder": 1
+      },
+      {
+        "menuContext": "进度归档",
+        "menuAction": "operation4ProjectPlan/index",
+        "menuDescription": "完成任务进度的归档处理",
+        "upMenuItem": "用户服务",
+        "menuOrder": 1
+      },
+      {
+        "menuContext": "所教课程",
+        "menuAction": "manage4Progress/index?title=所教课程&jsRoutine=progressKC",
+        "menuDescription": "我所管理的所有项目的进度管理",
+        "upMenuItem": "用户服务",
+        "menuOrder": 1
+      }
+    ]
+  },
+  {
+    "menuContext": "教师服务",
+    "menuAction": "#",
+    "menuDescription": "#",
+    "roleAttribute": "教师服务",
+    "menuOrder": 0,
+    "menuItems": [
+      {
+        "menuContext": "通用计划维护",
+        "menuAction": "operation4Plan/index",
+        "menuDescription": "与系统中的用户对话",
+        "upMenuItem": "教师服务",
+        "menuOrder": 0
+      },
+      {
+        "menuContext": "个性计划维护",
+        "menuAction": "operation4ProjectPlan/index",
+        "menuDescription": "上传每周工作汇报",
+        "upMenuItem": "教师服务",
+        "menuOrder": 0
+      }
+    ]
+  },
+  {
+    "menuContext": "学生服务",
+    "menuAction": "#",
+    "menuDescription": "#",
+    "roleAttribute": "学生服务",
+    "menuOrder": 0,
+    "menuItems": [
+      {
+        "menuContext": "课题任务",
+        "menuAction": "operation4TeamManageA/index",
+        "menuDescription": "与系统中的用户对话",
+        "upMenuItem": "学生服务",
+        "menuOrder": 0
+      },
+      {
+        "menuContext": "工作汇报",
+        "menuAction": "operation4Student/index",
+        "menuDescription": "上传每周工作汇报",
+        "upMenuItem": "学生服务",
+        "menuOrder": 0
+      }
+    ]
+  }
+]
