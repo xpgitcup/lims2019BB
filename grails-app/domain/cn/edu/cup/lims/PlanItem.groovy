@@ -3,19 +3,13 @@ package cn.edu.cup.lims
 class PlanItem {
 
     String description
-    String status
-    String fileName
-    String progressList
-    Double percent = 0
+    PlanItem upPlanItem
 
     static belongsTo = [plan: Plan]
 
     static constraints = {
+        upPlanItem(nullable: true)
         description()
-        status()
-        fileName(nullable: true)
-        progressList(nullable: true)
-        percent()
     }
 
     String toString() {
