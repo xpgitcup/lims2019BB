@@ -4,8 +4,8 @@ class ProjectPlanItem {
 
     ProjectPlanItem upProjectItem
     String description
-    String status
-    String progressList
+    String status = ""
+    String progressList = ""
     Double percent = 0
 
     static belongsTo = [projectPlan: ProjectPlan]

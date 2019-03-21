@@ -15,6 +15,6 @@ class PlanItem {
     }
 
     String toString() {
-        return "${plan}.${description}"
+        return "${description}"
     }
 }
