@@ -13,10 +13,6 @@
             <thead>
             <th>前情</th>
             <th>状态</th>
-            <th>贡献者</th>
-            <th>问题</th>
-            <th>支撑文件</th>
-            <th>日期</th>
             </thead>
             <tbody>
             <g:each in="${objectList}" var="item" status="i">
@@ -24,12 +20,7 @@
                     <td>${item?.prevProgress?.currentStatus}</td>
                     <td>
                         ${item.currentStatus}
-                        <a class="create" href="javascript: createNextProgress(${item?.id})">上报进度</a>
                     </td>
-                    <td>${item.contributor}</td>
-                    <td>${item.problemEncounter}</td>
-                    <td>${item.supportFileName}</td>
-                    <td>${item.regDate}</td>
                 </tr>
             </g:each>
             </tbody>

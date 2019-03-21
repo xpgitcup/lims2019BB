@@ -32,6 +32,17 @@ $(function () {
         }
     })
 
+    $('.dragitem').draggable({
+        revert:true,
+        deltaX:10,
+        deltaY:10,
+        proxy:function(source){
+            var n = $('<div class="proxy"></div>');
+            n.html($(source).html()).appendTo('body');
+            return n;
+        }
+    });
+
 });
 
 function loadTeams(page, pageSize) {
@@ -125,3 +136,4 @@ function countProgress() {
     console.info("统计进度：" + total);
     return total
 }
+
