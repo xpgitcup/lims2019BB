@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-21 09:16:25
+Date: 2019-03-21 16:39:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `query_statement` (
   `view_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `UK_iejb2adhrl11w1nanxv8r9hql` (`key_string`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of query_statement
@@ -80,8 +80,8 @@ INSERT INTO `query_statement` VALUES ('43', '0', null, null, '\0', '\0', 'list.o
 INSERT INTO `query_statement` VALUES ('44', '0', null, null, '\0', '\0', 'list.operation4Team.currentTeam.队员列表', null);
 INSERT INTO `query_statement` VALUES ('45', '0', 'keyString', 'select count(*) from QueryStatement queryStatement where queryStatement.keyString like :keyString', '\0', '', 'count.operation4QueryStatement.查询配置.keyString', null);
 INSERT INTO `query_statement` VALUES ('46', '0', 'keyString', 'from QueryStatement queryStatement where queryStatement.keyString like :keyString', '\0', '', 'list.operation4QueryStatement.查询配置.keyString', 'listQueryStatement');
-INSERT INTO `query_statement` VALUES ('47', '9', 'thingTypeId', 'from Plan plan  where plan.thingType.id=cast(:thingTypeId as integer) order by updateDate desc', '\0', '', 'list.operation4Plan.通用计划.thingTypeId', 'listPlan');
-INSERT INTO `query_statement` VALUES ('48', '4', 'thingTypeId', 'select count(*) from Plan plan where plan.thingType.id=cast(:thingTypeId as integer)', '\0', '', 'count.operation4Plan.通用计划.thingTypeId', null);
+INSERT INTO `query_statement` VALUES ('47', '10', 'thingTypeId', 'from Plan plan  where plan.thingType.id=cast(:thingTypeId as integer) and plan.upPlan is null order by updateDate desc', '\0', '', 'list.operation4Plan.通用计划.thingTypeId', 'listPlan');
+INSERT INTO `query_statement` VALUES ('48', '5', 'thingTypeId', 'select count(*) from Plan plan where plan.thingType.id=cast(:thingTypeId as integer) and plan.upPlan is null', '\0', '', 'count.operation4Plan.通用计划.thingTypeId', null);
 INSERT INTO `query_statement` VALUES ('49', '1', 'thingTypeList', 'select count(*) from Team team where team.thing in :thingTypeList', '\0', '', 'count.operation4ProjectPlan.进度归档.myself', null);
 INSERT INTO `query_statement` VALUES ('50', '1', 'thingTypeList', 'from Team team where team.thing in :thingTypeList order by team.thing', '\0', '', 'list.operation4ProjectPlan.进度归档.myself', 'listTeam');
 INSERT INTO `query_statement` VALUES ('51', '1', 'thingTypeList', 'select count(*) from Team team where team.thing in :thingTypeList', '\0', '', 'count.operation4ProjectPlan.进度归档.thingTypeList', null);

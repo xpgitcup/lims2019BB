@@ -2,7 +2,6 @@ package cn.edu.cup.os4lims
 
 import cn.edu.cup.lims.Plan
 import cn.edu.cup.lims.PlanController
-import cn.edu.cup.lims.PlanItem
 import cn.edu.cup.lims.ThingType
 import com.alibaba.fastjson.JSON
 
@@ -10,7 +9,6 @@ class Operation4PlanController extends PlanController {
 
     def thingTypeService
     def commonService
-    def planItemService
 
     def createAuto() {
         def thingType = thingTypeService.get(params.thingTypeId)
@@ -28,6 +26,7 @@ class Operation4PlanController extends PlanController {
         if (Plan.countByThingType(thingType) < 1) {
             def newPlan = new Plan(
                     thingType: thingType,
+                    description: "${thingType.name}.计划",
                     updateDate: new Date()
             )
             planService.save(newPlan)
@@ -41,28 +40,38 @@ class Operation4PlanController extends PlanController {
         if (items) {
             println("完善：${thingTypeName}")
             items.each { e ->
-                if (PlanItem.countByPlanAndDescription(plan, e) < 1) {
-                    def newItem = new PlanItem(description: e, plan: plan)
-                    planItemService.save(newItem)
+                if (Plan.countByUpPlanAndDescription(plan, e) < 1) {
+                    createSubPlanItem(plan, e)
                 }
             }
         } else {
+            println("继承上级计划：${thingTypeName}")
             def ut = thingType.upType
             if (ut) {
                 //如果有上级类型,找到有详细计划的
-                def pp = Plan.findByThingType(ut)
-                while (pp && (pp.planItems?.size() < 1) && (ut.upType)) {
+                def pp = Plan.findByThingTypeAndUpPlanIsNull(ut)
+                while (pp && (pp.subItems?.size() < 1) && (ut.upType)) {
                     ut = ut.upType
-                    pp = Plan.findByThingType(ut)
+                    pp = Plan.findByThingTypeAndUpPlanIsNull(ut)
                 }
-                pp.planItems?.each { e->
-                    if (PlanItem.countByPlanAndDescription(plan, e.description) < 1) {
-                        def newItem = new PlanItem(description: e.description, plan: plan)
-                        planItemService.save(newItem)
+                println("回溯完成：${pp}")
+                pp.subItems?.each { e ->
+                    if (Plan.countByUpPlanAndDescription(plan, e.description) < 1) {
+                        createSubPlanItem(plan, e.description)
                     }
                 }
             }
         }
+    }
+
+    private void createSubPlanItem(Plan plan, String e) {
+        def newItem = new Plan(
+                description: e,
+                upPlan: plan,
+                thingType: plan.thingType,
+                updateDate: new Date()
+        )
+        planService.save(newItem)
     }
 
     def index() {
