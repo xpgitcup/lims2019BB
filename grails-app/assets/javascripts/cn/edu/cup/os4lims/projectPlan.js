@@ -32,17 +32,6 @@ $(function () {
         }
     })
 
-    $('.dragitem').draggable({
-        revert:true,
-        deltaX:10,
-        deltaY:10,
-        proxy:function(source){
-            var n = $('<div class="proxy"></div>');
-            n.html($(source).html()).appendTo('body');
-            return n;
-        }
-    });
-
 });
 
 function loadTeams(page, pageSize) {
@@ -110,6 +99,11 @@ function shiftDisplay(currentTeam, currentPage) {
         projectPlanDiv.style.display = "none";
         loadTeams(currentPage, pageSize4ProjectPlan);
     }
+}
+
+function changeUpNode(node) {
+    console.info(node.target);
+    $(".chose").html("归档->" + node.attributes[0]);
 }
 
 function selectTeam(id) {

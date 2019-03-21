@@ -20,6 +20,7 @@
                     <td>${item?.prevProgress?.currentStatus}</td>
                     <td>
                         ${item.currentStatus}
+                        <a class="chose" href="javascript: selectProgress(${item.id})"></a>
                     </td>
                 </tr>
             </g:each>
