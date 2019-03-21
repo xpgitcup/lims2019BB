@@ -24,7 +24,8 @@ class Operation4ProjectPlanController extends ProjectPlanController {
                 description: "${team}.进度管理",
                 team: team,
                 precent: 0,
-                updateDate: new Date()
+                updateDate: new Date(),
+                serialNumber: 0
         )
         projectPlanService.save(projectPlan)
         checkProjectPlanItems(team, projectPlan)
@@ -40,7 +41,8 @@ class Operation4ProjectPlanController extends ProjectPlanController {
                         description: e.description,
                         precent: 0,
                         team: team,
-                        updateDate: new Date()
+                        updateDate: new Date(),
+                        serialNumber: e.serialNumber
                 )
                 projectPlanService.save(newItem)
             }

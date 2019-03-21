@@ -57,19 +57,31 @@ class Operation4PlanController extends PlanController {
                 println("回溯完成：${pp}")
                 pp.subItems?.each { e ->
                     if (Plan.countByUpPlanAndDescription(plan, e.description) < 1) {
-                        createSubPlanItem(plan, e.description)
+                        copyPlanItem(plan, e)
                     }
                 }
             }
         }
     }
 
-    private void createSubPlanItem(Plan plan, String e) {
+    private void copyPlanItem(Plan plan, e) {
         def newItem = new Plan(
-                description: e,
+                description: e.description,
                 upPlan: plan,
                 thingType: plan.thingType,
-                updateDate: new Date()
+                updateDate: new Date(),
+                serialNumber: e.serialNumber
+        )
+        planService.save(newItem)
+    }
+
+    private void createSubPlanItem(Plan plan, e) {
+        def newItem = new Plan(
+                description: e.name,
+                upPlan: plan,
+                thingType: plan.thingType,
+                updateDate: new Date(),
+                serialNumber: e.sn
         )
         planService.save(newItem)
     }
