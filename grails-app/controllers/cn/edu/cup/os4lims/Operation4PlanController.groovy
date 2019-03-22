@@ -88,6 +88,53 @@ class Operation4PlanController extends PlanController {
 
     def index() {
         //println("${params}")
+        Object plans = loadPlanConfig()
+
+        initTypePlan(plans)
+        return super.index()
+    }
+
+    private void initTypePlan(plans) {
+        plans.each { e ->
+            def tp = ThingType.findByName(e.key)
+            if (tp) {
+                println("创建 ${e.key} 计划...")
+                if (Plan.countByThingTypeAndUpPlanIsNull(tp) < 1) {
+                    createPlan4ThingType(tp, e)
+                    if (tp.subTypes) {
+                        tp.subTypes.each { etp ->
+                            createPlan4ThingType(etp, e)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void createPlan4ThingType(thingType, e) {
+        // 创建根节点
+        def p = new Plan(
+                thingType: thingType,
+                description: "${thingType.name}.计划",
+                serialNumber: 0,
+                updateDate: new Date()
+        )
+        planService.save(p)
+        // 创建叶节点
+        println("${e.value}")
+        e.value.each { ee ->
+            def sp = new Plan(
+                    upPlan: p,
+                    thingType: thingType,
+                    description: ee.name,
+                    serialNumber: ee.sn,
+                    updateDate: new Date()
+            )
+            planService.save(sp)
+        }
+    }
+
+    private Object loadPlanConfig() {
         def fileName = "${commonService.webRootPath}/systemConfig/thingTypePlan.json"
         def jsonFile = new File(fileName)
         def plans
@@ -96,11 +143,6 @@ class Operation4PlanController extends PlanController {
             plans = JSON.parse(json)
             println("计划配置：${plans}")
         }
-
-        ThingType.list().each { e ->
-            println("创建：${e}.计划")
-            createPlan(e, plans)
-        }
-        return super.index()
+        return plans
     }
 }
