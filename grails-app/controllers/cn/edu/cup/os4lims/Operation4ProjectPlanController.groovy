@@ -16,7 +16,21 @@ class Operation4ProjectPlanController extends ProjectPlanController {
 
     def teamService
     def treeViewService
-    def projectPlanItemService
+    def progressService
+
+    def addProgress() {
+        def projectPlan = projectPlanService.get(params.projectPlan)
+        if (projectPlan) {
+            def progress = progressService.get(params.progress)
+            if (progress) {
+                if (!projectPlan.progresses.contains(progress)) {
+                    projectPlan.progresses.add(progress)
+                    projectPlanService.save(projectPlan)
+                }
+            }
+        }
+        redirect(action: "index")
+    }
 
     def createProjectPlan(Team team) {
         def projectPlan = new ProjectPlan(
@@ -57,9 +71,11 @@ class Operation4ProjectPlanController extends ProjectPlanController {
         } else {
             projectPlan = ProjectPlan.findByTeamAndUpProjectPlanIsNull(team)
         }
-        params.context = "description"
+        //params.context = "description"
+        params.context = "toString"
         params.subItems = "subItems"
         params.attributes = "id"    //
+        params.useMethod = true
         def result = treeViewService.generateNodesString(projectPlan, params, JsFrame.EasyUI)
         if (request.xhr) {
             render result as JSON

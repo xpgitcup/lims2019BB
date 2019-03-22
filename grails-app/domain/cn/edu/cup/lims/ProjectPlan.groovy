@@ -6,19 +6,17 @@ class ProjectPlan {
     Team team
     String description
     String status = ""
-    String progressList = ""
     Date updateDate
     Double percent = 0
     Integer serialNumber = 0
 
-    static hasMany = [subItems: ProjectPlan]
+    static hasMany = [subItems: ProjectPlan, progresses: Progress]
 
     static constraints = {
         upProjectPlan(nullable: true)
         team()
         description()
         status()
-        progressList()
         updateDate()
         percent()
         serialNumber()
@@ -29,6 +27,7 @@ class ProjectPlan {
     }
 
     String toString() {
-        return "${description}"
+        return "${description}.${progresses?.size()}"
     }
+
 }

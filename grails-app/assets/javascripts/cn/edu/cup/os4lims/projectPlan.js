@@ -104,6 +104,7 @@ function shiftDisplay(currentTeam, currentPage) {
 function changeUpNode(node) {
     console.info(node.target);
     $(".chose").html("归档->" + node.attributes[0]);
+    $.cookie("currentPlanItem", node.attributes[0]);
 }
 
 function selectTeam(id) {
@@ -131,3 +132,9 @@ function countProgress() {
     return total
 }
 
+function selectProgress(id) {
+    console.info("归档：" + id);
+    var planItem = readCookie("currentPlanItem", 0);
+    ajaxExecute("operation4ProjectPlan/addProgress?projectPlan=" + planItem + "&progress=" + id);
+    location.reload();
+}
