@@ -12,16 +12,24 @@
         <!--f:table collection="${objectList}"/-->
         <table>
             <thead>
+            <td>id</td>
             <th>前情</th>
             <th>状态</th>
+            <th>归档状态</th>
             </thead>
             <tbody>
             <g:each in="${objectList}" var="item" status="i">
                 <tr class="${(i % 2 == 0 ? 'even' : 'odd')}">
+                    <td>${item.id}</td>
                     <td>${item?.prevProgress?.currentStatus}</td>
                     <td>
-                        ${item.currentStatus} ${statusList.get(item)}
-                        <a class="chose" href="javascript: selectProgress(${item.id})"></a>
+                        ${item.currentStatus}
+                        <g:if test="${statusList.get(item)[0] < 1}">
+                            <a class="chose" href="javascript: selectProgress(${item.id})"></a>
+                        </g:if>
+                    </td>
+                    <td>
+                        ${statusList.get(item)}
                     </td>
                 </tr>
             </g:each>

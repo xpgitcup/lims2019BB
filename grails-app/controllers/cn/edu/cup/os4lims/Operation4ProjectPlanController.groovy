@@ -17,6 +17,7 @@ class Operation4ProjectPlanController extends ProjectPlanController {
     def teamService
     def treeViewService
     def progressService
+    def dataSource
 
     def addProgress() {
         def projectPlan = projectPlanService.get(params.projectPlan)
@@ -131,8 +132,11 @@ class Operation4ProjectPlanController extends ProjectPlanController {
                     projectPlan = ProjectPlan.findByTeamAndUpProjectPlanIsNull(result.objectList[0].team)
                     result.objectList.each { e ->
                         println("检查：${e}的归档情况...")
-                        //def s = ProjectPlan.countByProgresses([e])
-                        //status.put(e, s)
+                        def sql = "select count(*) from project_plan_progress where progress_id=${e.id}"
+                        def db = new groovy.sql.Sql(dataSource)
+                        def s = db.rows(sql)
+                        println("进度：${s}")
+                        status.put(e, s.getAt("count(*)"))
                     }
                 }
                 result.status = status
