@@ -40,6 +40,8 @@
         <li>
             <a href="javascript: clearTeam()">重新选择</a>
         </li>
+        <li>||</li>
+        <li style="color: red" id="guidMessage">先点击左边计划中的某一项，然后点击右边的归档链接，完成归档！</li>
     </ul>
 </div>
 

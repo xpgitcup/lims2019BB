@@ -51,10 +51,13 @@ function countTeams() {
 function shiftDisplay(currentTeam, currentPage) {
     var projectPlanDiv = document.getElementById("projectPlanDiv");
     var teamListDiv = document.getElementById("teamListDiv");
+    var guidMessage = document.getElementById("guidMessage");
+
     if (currentTeam > 0) {
         $("#projectSelect").html("当前团队:" + currentTeam);
         teamListDiv.style.display = "none";
         projectPlanDiv.style.display = "block";
+        guidMessage.style.display = "block";
 
         var title = jsTitle4ProjectPlan;
         operation4ProjectPlanUL = $("#operation4ProjectPlanUL");
@@ -97,6 +100,8 @@ function shiftDisplay(currentTeam, currentPage) {
         $("#projectSelect").html("选择团队");
         teamListDiv.style.display = "block";
         projectPlanDiv.style.display = "none";
+        guidMessage.style.display = "noone";
+
         loadTeams(currentPage, pageSize4ProjectPlan);
     }
 }

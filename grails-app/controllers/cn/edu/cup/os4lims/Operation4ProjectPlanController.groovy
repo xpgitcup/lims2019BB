@@ -114,18 +114,44 @@ class Operation4ProjectPlanController extends ProjectPlanController {
     }
 
     protected def processResult(result, params) {
+        def status = [:]
+        def projectPlan
         switch (params.key) {
             case "进度归档":
                 result.objectList.each { e ->
                     println("检查：${e}的归档信息...")
-                    def projectPlan = ProjectPlan.findByTeamAndUpProjectPlanIsNull(e)
+                    projectPlan = ProjectPlan.findByTeamAndUpProjectPlanIsNull(e)
                     if (!projectPlan) {
-                        createProjectPlan(e)
+                        projectPlan = createProjectPlan(e)
                     }
                 }
                 break
+            case "进度列表":
+                if (result.objectList.size()>0) {
+                    projectPlan = ProjectPlan.findByTeamAndUpProjectPlanIsNull(result.objectList[0].team)
+                    result.objectList.each { e ->
+                        println("检查：${e}的归档情况...")
+                        //def s = ProjectPlan.countByProgresses([e])
+                        //status.put(e, s)
+                    }
+                }
+                result.status = status
+                break;
         }
         return result
+    }
+
+    def list() {
+        prepareParams()
+        def result = commonQueryService.listFunction(params)
+        result = processResult(result, params)
+        def view = result.view
+        flash.message = result.message
+        if (request.xhr) {
+            render(template: view, model: [objectList: result.objectList, flash: flash, statusList: result.status])
+        } else {
+            respond result.objectList
+        }
     }
 
     def index() {}

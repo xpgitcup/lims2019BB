@@ -30,4 +30,7 @@ class ProjectPlan {
         return "${description}.${progresses?.size()}"
     }
 
+    String showDetail() {
+        return "${description}.${progresses}"
+    }
 }

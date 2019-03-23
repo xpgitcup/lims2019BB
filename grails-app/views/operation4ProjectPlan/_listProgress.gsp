@@ -8,6 +8,7 @@
         <a class="create" href="javascript: createCurrentProgress()">上报进度[${team}]</a>
     </g:if>
     <g:else>
+        <h1>[${objectList[0].team}]---进度列表</h1>
         <!--f:table collection="${objectList}"/-->
         <table>
             <thead>
@@ -19,7 +20,7 @@
                 <tr class="${(i % 2 == 0 ? 'even' : 'odd')}">
                     <td>${item?.prevProgress?.currentStatus}</td>
                     <td>
-                        ${item.currentStatus}
+                        ${item.currentStatus} ${statusList.get(item)}
                         <a class="chose" href="javascript: selectProgress(${item.id})"></a>
                     </td>
                 </tr>
