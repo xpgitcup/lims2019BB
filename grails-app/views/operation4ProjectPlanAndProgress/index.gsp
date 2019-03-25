@@ -41,7 +41,7 @@
             <a href="javascript: clearTeam()">重新选择</a>
         </li>
         <li>||</li>
-        <li style="color: red" id="guidMessage">先点击左边计划中的某一项，然后点击右边的归档链接，完成归档！</li>
+        <li style="color: red" id="guidMessage">先点击上边计划中的某一项，然后点下边的归档链接，完成归档！</li>
     </ul>
 </div>
 
@@ -58,14 +58,14 @@
 
     <div id="projectPlanDiv">
         <!--左面显示类型-->
-        <div class="col-md-4">
+        <div>
             <div class="easyui-panel">
                 <!--这是进度计划的树形结构-->
-                <ul id="operation4ProjectPlanAndProgressAndProgressUL" class="easyui-tree"></ul>
+                <ul id="operation4ProjectPlanAndProgressUL" class="easyui-tree"></ul>
             </div>
         </div>
         <!--右边显示计划-->
-        <div class="col-md-8">
+        <div>
             <div id="operation4ProjectPlanAndProgressProgressListDiv" class="easyui-panel"></div>
 
             <div id="pagination4ProjectPlanAndProgressProgressListDiv" class="easyui-pagination"></div>

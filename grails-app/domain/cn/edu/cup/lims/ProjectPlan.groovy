@@ -31,6 +31,8 @@ class ProjectPlan {
     }
 
     String showDetail() {
-        return "${description}.${progresses}"
+        def p = ""
+        progresses.each { e -> p += "${e.id}," }
+        return "${description}.[${p}]"
     }
 }
