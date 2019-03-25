@@ -139,8 +139,8 @@
         "menuOrder": 1
       },
       {
-        "menuContext": "进度管理",
-        "menuAction": "operation4ProjectPlan/index",
+        "menuContext": "进度维护",
+        "menuAction": "operation4ProjectPlanAndProgress/index",
         "menuDescription": "完成任务进度的归档处理",
         "upMenuItem": "用户服务",
         "menuOrder": 1

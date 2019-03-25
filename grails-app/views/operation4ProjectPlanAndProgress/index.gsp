@@ -23,10 +23,10 @@
     </g:else>
 <!-- end 实现可定制的布局 -->
 <!--这个地方设置成固定的-->
-    <g:set var="entityName" value="进度归档"/>
+    <g:set var="entityName" value="进度维护"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${entityName}维护</title>
-    <asset:javascript src="cn/edu/cup/os4lims/projectPlan.js"/>
+    <asset:javascript src="cn/edu/cup/os4lims/ProjectPlanAndProgress.js"/>
 </head>
 
 <body>
@@ -52,8 +52,8 @@
 <div class="container-fluid">
     <div id="teamListDiv">
         <!--当前项目-->
-        <div id="operation4ProjectPlanTeamListDiv" class="easyui-panel"></div>
-        <div id="pagination4ProjectPlanTeamListDiv" class="easyui-pagination"></div>
+        <div id="operation4ProjectPlanAndProgressTeamListDiv" class="easyui-panel"></div>
+        <div id="pagination4ProjectPlanAndProgressTeamListDiv" class="easyui-pagination"></div>
     </div>
 
     <div id="projectPlanDiv">
@@ -61,14 +61,14 @@
         <div class="col-md-4">
             <div class="easyui-panel">
                 <!--这是进度计划的树形结构-->
-                <ul id="operation4ProjectPlanUL" class="easyui-tree"></ul>
+                <ul id="operation4ProjectPlanAndProgressAndProgressUL" class="easyui-tree"></ul>
             </div>
         </div>
         <!--右边显示计划-->
         <div class="col-md-8">
-            <div id="operation4ProjectPlanProgressListDiv" class="easyui-panel"></div>
+            <div id="operation4ProjectPlanAndProgressProgressListDiv" class="easyui-panel"></div>
 
-            <div id="pagination4ProjectPlanProgressListDiv" class="easyui-pagination"></div>
+            <div id="pagination4ProjectPlanAndProgressProgressListDiv" class="easyui-pagination"></div>
         </div>
     </div>
 </div>
